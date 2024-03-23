@@ -18,7 +18,7 @@ public static class TimeZoneInfoExtension
     /// It does not differentiate between Standard Time and Daylight Saving Time. The method returns "Unknown" 
     /// for any time zone not explicitly handled in the method's implementation.
     /// </remarks>
-    public static string GetSimpleAbbreviation(this System.TimeZoneInfo timeZone)
+    public static string ToSimpleAbbreviation(this System.TimeZoneInfo timeZone)
     {
         return timeZone.Id switch
         {

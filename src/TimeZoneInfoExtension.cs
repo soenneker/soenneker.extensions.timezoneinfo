@@ -16,16 +16,16 @@ public static class TimeZoneInfoExtension
     /// <remarks>
     /// This method provides a simple abbreviation for a limited set of time zones based on their identifiers. 
     /// It does not differentiate between Standard Time and Daylight Saving Time. The method returns "Unknown" 
-    /// for any time zone not explicitly handled in the method's implementation.
+    /// for any time zone not explicitly handled in the method's implementation. Supports IANA.
     /// </remarks>
     public static string ToSimpleAbbreviation(this System.TimeZoneInfo timeZone)
     {
         return timeZone.Id switch
         {
-            "Eastern Standard Time" => "ET",
-            "Central Standard Time" => "CT",
-            "Mountain Standard Time" => "MT",
-            "Pacific Standard Time" => "PT",
+            "Eastern Standard Time" or "America/New_York" => "ET",
+            "Central Standard Time" or "America/Chicago" => "CT",
+            "Mountain Standard Time" or "America/Denver" => "MT",
+            "Pacific Standard Time" or "America/Los_Angeles" => "PT",
             _ => "Unknown"
         };
     }

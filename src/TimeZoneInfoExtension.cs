@@ -8,7 +8,7 @@ namespace Soenneker.Extensions.TimeZoneInfo;
 /// </summary>
 public static class TimeZoneInfoExtension
 {
-    private static readonly Dictionary<string, string> TimeZoneAbbreviations = new(StringComparer.OrdinalIgnoreCase)
+    private static readonly Dictionary<string, string> _timeZoneAbbreviations = new(StringComparer.OrdinalIgnoreCase)
     {
         { "Eastern Standard Time", "ET" },
         { "America/New_York", "ET" },
@@ -27,6 +27,6 @@ public static class TimeZoneInfoExtension
     /// <returns>The abbreviation (e.g., "ET", "CT", "MT", "PT"), or "Unknown" if the time zone is not recognized.</returns>
     public static string ToSimpleAbbreviation(this System.TimeZoneInfo timeZone)
     {
-        return TimeZoneAbbreviations.GetValueOrDefault(timeZone.Id, "Unknown");
+        return _timeZoneAbbreviations.GetValueOrDefault(timeZone.Id, "Unknown");
     }
 }

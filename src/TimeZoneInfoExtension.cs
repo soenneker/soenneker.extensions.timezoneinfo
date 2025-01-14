@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Soenneker.Extensions.TimeZoneInfo;
 
@@ -7,26 +8,25 @@ namespace Soenneker.Extensions.TimeZoneInfo;
 /// </summary>
 public static class TimeZoneInfoExtension
 {
+    private static readonly Dictionary<string, string> TimeZoneAbbreviations = new(StringComparer.OrdinalIgnoreCase)
+    {
+        { "Eastern Standard Time", "ET" },
+        { "America/New_York", "ET" },
+        { "Central Standard Time", "CT" },
+        { "America/Chicago", "CT" },
+        { "Mountain Standard Time", "MT" },
+        { "America/Denver", "MT" },
+        { "Pacific Standard Time", "PT" },
+        { "America/Los_Angeles", "PT" }
+    };
+
     /// <summary>
-    /// Gets a simplified time zone abbreviation based on the time zone's identifier.
+    /// Converts a TimeZoneInfo to its corresponding simple abbreviation.
     /// </summary>
-    /// <param name="timeZone">The <see cref="TimeZoneInfo"/> instance to get the abbreviation for.</param>
-    /// <returns>A string representing the simplified abbreviation of the time zone. For example, "ET" for Eastern Time.</returns>
-    /// <exception cref="NullReferenceException">Thrown if <paramref name="timeZone"/> is null.</exception>
-    /// <remarks>
-    /// This method provides a simple abbreviation for a limited set of time zones based on their identifiers. 
-    /// It does not differentiate between Standard Time and Daylight Saving Time. The method returns "Unknown" 
-    /// for any time zone not explicitly handled in the method's implementation. Supports IANA.
-    /// </remarks>
+    /// <param name="timeZone">The TimeZoneInfo instance.</param>
+    /// <returns>The abbreviation (e.g., "ET", "CT", "MT", "PT"), or "Unknown" if the time zone is not recognized.</returns>
     public static string ToSimpleAbbreviation(this System.TimeZoneInfo timeZone)
     {
-        return timeZone.Id switch
-        {
-            "Eastern Standard Time" or "America/New_York" => "ET",
-            "Central Standard Time" or "America/Chicago" => "CT",
-            "Mountain Standard Time" or "America/Denver" => "MT",
-            "Pacific Standard Time" or "America/Los_Angeles" => "PT",
-            _ => "Unknown"
-        };
+        return TimeZoneAbbreviations.GetValueOrDefault(timeZone.Id, "Unknown");
     }
 }

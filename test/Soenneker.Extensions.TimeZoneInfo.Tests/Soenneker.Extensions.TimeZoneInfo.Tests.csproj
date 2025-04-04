@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AwesomeAssertions" Version="8.0.2" />
+        <PackageReference Include="AwesomeAssertions" Version="8.1.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
         <PackageReference Include="Soenneker.Utils.TimeZones" Version="3.0.705" />
         
